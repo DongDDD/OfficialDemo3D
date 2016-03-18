@@ -41,13 +41,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "OfficialDemo3D/Views/CusAnnotationView.m"
-            timestampString = "479915355.128538"
+            filePath = "OfficialDemo3D/Controllers/SearchControllers/SearchBaseControllers/GeoViewController.m"
+            timestampString = "479901411.583424"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
-            landmarkName = "-btnAction"
+            startingLineNumber = "73"
+            endingLineNumber = "73"
+            landmarkName = "-pickerDidChaneStatus:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "OfficialDemo3D/Controllers/SearchControllers/SearchBaseControllers/GeoViewController.m"
+            timestampString = "479902148.492784"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "119"
+            endingLineNumber = "119"
+            landmarkName = "-textFieldShouldBeginEditing:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
