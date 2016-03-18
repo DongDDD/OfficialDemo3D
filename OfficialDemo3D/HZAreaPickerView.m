@@ -10,8 +10,8 @@
 #import <QuartzCore/QuartzCore.h>
 
 #define kDuration 0.3
-#define Screenheight  [UIScreen mainScreen].bounds.size.height
-#define ScreenWidth   [UIScreen mainScreen].bounds.size.width
+#define SH [UIScreen mainScreen].bounds.size.height
+#define SW [UIScreen mainScreen].bounds.size.width
 @interface HZAreaPickerView ()
 {
     NSArray *provinces, *cities, *areas;
@@ -217,13 +217,15 @@
 
 - (void)showInView:(UIView *) view
 {
-    self.frame = CGRectMake(0, -self.frame.size.height, ScreenWidth, self.frame.size.height*0.9);
+//    self.backgroundColor=[UIColor redColor];
+    
+    self.frame = CGRectMake(0, -SW*0.1,SW,SH*0.3);
     [view addSubview:self];
     
-    [UIView animateWithDuration:0.3 animations:^{
-        self.frame = CGRectMake(0,-50,ScreenWidth, self.frame.size.height*0.9);
-    }];
-    
+//    [UIView animateWithDuration:0.3 animations:^{
+//        self.frame = CGRectMake(0,-50,ScreenWidth, self.frame.size.height*0.9);
+//    }];
+//    
 }
 
 - (void)cancelPicker

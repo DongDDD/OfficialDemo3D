@@ -41,13 +41,39 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "OfficialDemo3D/Controllers/SearchControllers/SearchBaseControllers/GeoViewController.m"
-            timestampString = "479901411.583424"
+            filePath = "OfficialDemo3D/Views/CusAnnotationView.m"
+            timestampString = "479915355.128538"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "73"
-            endingLineNumber = "73"
-            landmarkName = "-pickerDidChaneStatus:"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "-btnAction"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            scope = "0"
+            stopOnStyle = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "OfficialDemo3D/Controllers/SearchControllers/SearchBaseControllers/GeoViewController.m"
+            timestampString = "480003045.269145"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "207"
+            endingLineNumber = "207"
+            landmarkName = "-onGeocodeSearchDone:response:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -58,12 +84,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OfficialDemo3D/Controllers/SearchControllers/SearchBaseControllers/GeoViewController.m"
-            timestampString = "479902148.492784"
+            timestampString = "480003045.269145"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "119"
-            endingLineNumber = "119"
-            landmarkName = "-textFieldShouldBeginEditing:"
+            startingLineNumber = "287"
+            endingLineNumber = "287"
+            landmarkName = "-setTextF1"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
