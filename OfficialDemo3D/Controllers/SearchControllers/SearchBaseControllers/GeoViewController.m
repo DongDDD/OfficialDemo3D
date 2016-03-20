@@ -28,6 +28,7 @@
 @property(nonatomic,retain) UISlider *zoomSilder1;
 @property(assign, readwrite, nonatomic) CGFloat latitude1;
 @property(assign, readwrite, nonatomic) CGFloat longitude1;
+@property(nonatomic,retain)MAPointAnnotation *pointAnnotation;
 //@property(nonatomic,assign)
 
 -(void)cancelLocatePicker;
@@ -171,35 +172,73 @@
 
 #pragma mark - MAMapViewDelegate
 
-- (void)mapView:(MAMapView *)mapView annotationView:(MAAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
-{
-    if ([view.annotation isKindOfClass:[GeocodeAnnotation class]])
-    {
-        [self gotoDetailForGeocode:[(GeocodeAnnotation*)view.annotation geocode]];
-    }
-}
+//- (void)mapView:(MAMapView *)mapView annotationView:(MAAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
+//{
+//    if ([view.annotation isKindOfClass:[GeocodeAnnotation class]])
+//    {
+//        [self gotoDetailForGeocode:[(GeocodeAnnotation*)view.annotation geocode]];
+//    }
+//}
+
+
+#pragma mark -  地图被拖动后 调用
+- (void)mapView:(MAMapView *)mapView regionDidChangeAnimated:(BOOL)animated{
+    // 获取地图中心坐标
+//            NSLog(@"地图中心坐标%f %f",mapView.region.center);
+//    self.latitude1=geocodeAnnotation.coordinate.latitude;
+//    self.longitude1=geocodeAnnotation.coordinate.longitude;
+    //        NSString *latStr=[NSString stringWithFormat:@"%f %f",self.latitude1,self.longitude1];
+      NSString *ZuoBiaoStr=[NSString stringWithFormat:@"经： %f          纬：%f",mapView.region.center];
+      self.coorLabel1.text=ZuoBiaoStr;
+//    MAPointAnnotation *pointAnnotation = [[MAPointAnnotation alloc] init];
+//    self.pointAnnotation.coordinate = CLLocationCoordinate2DMake(mapView.region.center.latitude, mapView.region.center.longitude);
+//    self.pointAnnotation.title = @"方恒国际";
+//    self.pointAnnotation.subtitle = @"阜通东大街6号";
+//    
+//    [self.mapView addAnnotation:self.pointAnnotation];
+   
+ }
 #pragma mark - MAMapViewDelegate 图钉属性
-- (MAAnnotationView *)mapView:(MAMapView *)mapView viewForAnnotation:(id<MAAnnotation>)annotation
-{
-    if ([annotation isKindOfClass:[GeocodeAnnotation class]])
-    {
-        static NSString *geoCellIdentifier = @"geoCellIdentifier";
-        
-        MAPinAnnotationView *poiAnnotationView = (MAPinAnnotationView*)[self.mapView dequeueReusableAnnotationViewWithIdentifier:geoCellIdentifier];
-        if (poiAnnotationView == nil)
-        {
-            poiAnnotationView = [[MAPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:geoCellIdentifier];
-        }
-        
+//- (MAAnnotationView *)mapView:(MAMapView *)mapView viewForAnnotation:(id<MAAnnotation>)annotation
+//{
+//    if ([annotation isKindOfClass:[GeocodeAnnotation class]])
+//    {
+//        static NSString *geoCellIdentifier = @"geoCellIdentifier";
+//        
+//        MAPinAnnotationView *poiAnnotationView = (MAPinAnnotationView*)[self.mapView dequeueReusableAnnotationViewWithIdentifier:geoCellIdentifier];
+//        if (poiAnnotationView == nil)
+//        {
+//            poiAnnotationView = [[MAPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:geoCellIdentifier];
+//        }
+//
 //        poiAnnotationView.canShowCallout = YES;
-        poiAnnotationView.draggable=YES;
+//        poiAnnotationView.setDragState=
 //        poiAnnotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-        
-        return poiAnnotationView;
-    }
-    
-    return nil;
-}
+//        
+//        return poiAnnotationView;
+//    }
+//    
+//    return nil;
+//}
+//- (MAAnnotationView *)mapView:(MAMapView *)mapView viewForAnnotation:(id <MAAnnotation>)annotation
+//{
+//    if ([annotation isKindOfClass:[MAPointAnnotation class]])
+//    {
+//        static NSString *pointReuseIndentifier = @"pointReuseIndentifier";
+//        MAPinAnnotationView*annotationView = (MAPinAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:pointReuseIndentifier];
+//        if (annotationView == nil)
+//        {
+//            annotationView = [[MAPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:pointReuseIndentifier];
+//        }
+//        annotationView.canShowCallout= YES;       //设置气泡可以弹出，默认为NO
+//        annotationView.animatesDrop = YES;        //设置标注动画显示，默认为NO
+//        annotationView.draggable = YES;        //设置标注可以拖动，默认为NO
+//        annotationView.pinColor = MAPinAnnotationColorPurple;
+//        
+//        return annotationView;
+//    }
+//    return nil;
+//}
 
 
 #pragma mark - AMapSearchDelegate  获取图钉坐标
@@ -228,6 +267,7 @@
     if (annotations.count == 1)
     {
         [self.mapView setCenterCoordinate:[annotations[0] coordinate] animated:YES];
+   
     }
     else
     {
@@ -236,6 +276,7 @@
     }
     
     [self.mapView addAnnotations:annotations];
+    [self.mapView removeAnnotations:annotations];
 }
 
 #pragma mark - HandleAction
@@ -280,16 +321,25 @@
     
     [self.view addSubview:self.adressMassage];
     //创建一个slider
-    self.zoomSilder1=[[UISlider alloc] initWithFrame:CGRectMake(self.view.bounds.size.width*0.1, SH*0.9, 250, 30)];
-    self.zoomSilder1.maximumValue=20;
-    self.zoomSilder1.minimumValue=0;
+    self.zoomSilder1=[[UISlider alloc] initWithFrame:CGRectMake(self.view.bounds.size.width*0.2, self.view.bounds.size.height*0.8+20, 250, 30)];
+    self.zoomSilder1.maximumValue=18.0f;
+    self.zoomSilder1.minimumValue=0.0f;
     self.zoomSilder1.value=10;
+    [self.zoomSilder1 addTarget:self action:@selector(sliderChanged) forControlEvents:UIControlEventTouchDragInside];
     [self.view addSubview:self.zoomSilder1];
- 
+    self.zoomSilder1.continuous = YES;
     //创建一个label显示坐标
     self.coorLabel1=[[UILabel alloc] initWithFrame:CGRectMake(0, SH*0.2, CGRectGetWidth(self.view.bounds), self.view.bounds.size.height*0.09-30)];
     self.coorLabel1.backgroundColor=[UIColor whiteColor];
     [self.view addSubview:self.coorLabel1];
+    // 创建一个图钉图片一直放在地图中心
+    UIImage *image1=[UIImage imageNamed:@"TuDing123"];
+    UIImageView *centerIma=[[UIImageView alloc] initWithImage:image1];
+    centerIma.frame = CGRectMake(SW/2-8, SH/2-29, 30, 30);
+//        centerView1.backgroundColor=[UIColor redColor];
+    [self.onlyMapView addSubview:centerIma];
+    
+    
     
     
     
@@ -308,7 +358,7 @@
     }];
     
 }
-#pragma mark - 搜索按钮事件
+#pragma mark -  按钮事件
 -(void)PinjieStr:(id)sender{
     
     self.geo.address = [NSString stringWithFormat:@"%@ %@ ",self.areaStr,self.adressMassage.text];
@@ -317,6 +367,9 @@
     
     [self.search AMapGeocodeSearch:_geo];
     
+}
+-(void)sliderChanged{
+    self.mapView.zoomLevel=self.zoomSilder1.value;
 }
 
 
@@ -338,8 +391,15 @@
  
     self.edgesForExtendedLayout = UIRectEdgeNone;
      self.geo = [[AMapGeocodeSearchRequest alloc] init];
+    self.geo.address =@"广州";
+    [self.search AMapGeocodeSearch:_geo];
     [self setTextF1];
     self.areaText.delegate=self;
+    
+    
+//    self.pointAnnotation = [[MAPointAnnotation alloc] init];
+    
+    
 //    self.geo = [[AMapGeocodeSearchRequest alloc] init];
 }
 

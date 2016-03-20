@@ -143,7 +143,8 @@
 {
     [super viewDidLoad];
     
-    self.onlyMapView=[[UIView alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height*0.3, self.view.bounds.size.width, self.view.bounds.size.height*0.7)];
+    self.onlyMapView=[[UIView alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height*0.3-50, self.view.bounds.size.width, self.view.bounds.size.height*0.7
+                                                              )];
     self.onlyMapView.backgroundColor=[UIColor redColor];
     [self.view addSubview:self.onlyMapView];
     
